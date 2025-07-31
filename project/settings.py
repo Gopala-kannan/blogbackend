@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
+import dj_database_url
 from pathlib import Path
 import os
 
@@ -46,6 +47,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -77,24 +79,14 @@ WSGI_APPLICATION = 'project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-"""DATABASES = {
+DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
-}"""
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'Blogdb',
-        'USER': 'postgres',
-        'PASSWORD': 'gopal17',
-        'HOST': 'localhost',
-        'PORT': '5432',
-    }
 }
 
+DATABASES["default"] = dj_database_url.parse("postgresql://postgre:khGOeZM1nVWJTOPfILLoRQZA8i2BZ2cP@dpg-d25jikh5pdvs73dm0j10-a.oregon-postgres.render.com/blogdb_kplc")
 
 
 # Password validation
@@ -131,12 +123,13 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+
+STATIC_ROOT = os.path.join(BASE_DIR / 'staticfiles')
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
-    # "http://localhost:8000",  
-    "https://blog-jet-two-63.vercel.app/"
+    "http://localhost:8000",  
 ]
 
 CORS_ALLOW_CREDENTIALS = True
@@ -144,7 +137,7 @@ CORS_ALLOW_CREDENTIALS = True
 
 
 STATICFILES_DIRS=[
-    BASE_DIR /'static'
+    BASE_DIR  / 'backend' / 'static'
 ]
 
 MEDIA_URL = '/images/'
