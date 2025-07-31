@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
+import dj_database_url
 from pathlib import Path
 import os
 
@@ -78,24 +79,14 @@ WSGI_APPLICATION = 'project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-"""DATABASES = {
+DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
-}"""
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'defaultdb',
-        'USER': 'avnadmin',
-        'PASSWORD': 'AVNS_9u9m4EOCBXFYnBkf-Zk',
-        'PORT': '25488',
-        'HOST': 'postgre-gopalakannanekannan-a415.b.aivencloud.com'
-    }
 }
 
+DATABASES["default"] = dj_database_url.parse("postgresql://postgre:khGOeZM1nVWJTOPfILLoRQZA8i2BZ2cP@dpg-d25jikh5pdvs73dm0j10-a.oregon-postgres.render.com/blogdb_kplc")
 
 
 # Password validation
