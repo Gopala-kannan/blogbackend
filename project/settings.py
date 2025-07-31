@@ -46,6 +46,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -87,11 +88,11 @@ WSGI_APPLICATION = 'project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'Blogdb',
-        'USER': 'postgres',
-        'PASSWORD': 'gopal17',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'NAME': 'defaultdb',
+        'USER': 'avnadmin',
+        'PASSWORD': 'AVNS_9u9m4EOCBXFYnBkf-Zk',
+        'PORT': '25488',
+        'HOST': 'postgre-gopalakannanekannan-a415.b.aivencloud.com'
     }
 }
 
@@ -131,12 +132,13 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+
+STATIC_ROOT = os.path.join(BASE_DIR / 'staticfiles')
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
-    # "http://localhost:8000",  
-    "https://blog-jet-two-63.vercel.app/"
+    "http://localhost:8000",  
 ]
 
 CORS_ALLOW_CREDENTIALS = True
@@ -144,7 +146,7 @@ CORS_ALLOW_CREDENTIALS = True
 
 
 STATICFILES_DIRS=[
-    BASE_DIR /'static'
+    BASE_DIR  / 'backend' / 'static'
 ]
 
 MEDIA_URL = '/images/'
